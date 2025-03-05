@@ -36,7 +36,8 @@ def details(request, pk):
     crowd_data = CrowdModel.objects.filter(location=place)
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Augast', 'September', 'October', 'November', 'December']
     data = []
-    reviews = TripReview.objects.filter(place=pk)
+    reviews = TripReview.objects.filter(place=place)
+    print(reviews)
     return render(request, 'details.html', {"rec_places" : recommended_places, 'single_place' : place, 'crowd_data' : crowd_data, 'months': months, 'reviews':reviews})
 
 def search_view(request):
@@ -149,6 +150,8 @@ def submit_trip_review(request, pk):
             travel_cost = request.POST.get("travel_cost")
             accommodation_cost = request.POST.get("accommodation_cost")
             food_cost = request.POST.get("food_cost")
+            rating = request.POST.get("rating")
+
 
             # Create TripReview object
             TripReview.objects.create(
@@ -159,7 +162,8 @@ def submit_trip_review(request, pk):
                 accommodation_cost=accommodation_cost,
                 food_cost=food_cost,
                 user=request.user,
-                place=place
+                place=place,
+                rating=rating
             )
 
             messages.success(request, "Your trip review has been submitted!")
