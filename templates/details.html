@@ -307,9 +307,15 @@
                     </div>
                 </div>
                 <div class="comment-content">
-                    <h3>{{i.review_text}}</h3>
+                    <h3>{{i.title}}</h3>
                     {% comment %} <p><strong>Oct 2024 • Couples</strong></p> {% endcomment %}
-                    <p>{{i.review_description}}</p>
+                    <p>{{i.description}}</p>
+                    <p>{{i.travel_Cost}}</p>
+                    <p><b>Travel Medium <b/>  : {{i.travel_medium}}</p>
+                    <p><b>Travel Cost <b/>  : {{i.travel_cost}}</p>
+                    <p><b>Food cost <b/>  : {{i.food_cost}}</p>
+                        {% comment %} <p>{{i.accommodation_cost}}</p> {% endcomment %}
+
                     <p class="comment-date">Written on {{i.date}} </p>
                 </div>
             </div>

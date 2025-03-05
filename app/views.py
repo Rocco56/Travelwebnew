@@ -36,7 +36,7 @@ def details(request, pk):
     crowd_data = CrowdModel.objects.filter(location=place)
     months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'Augast', 'September', 'October', 'November', 'December']
     data = []
-    reviews = ReviewModel.objects.filter(place=pk)
+    reviews = TripReview.objects.filter(place=pk)
     return render(request, 'details.html', {"rec_places" : recommended_places, 'single_place' : place, 'crowd_data' : crowd_data, 'months': months, 'reviews':reviews})
 
 def search_view(request):
