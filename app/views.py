@@ -11,6 +11,7 @@ import googlemaps
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+from django.urls import reverse
 # Create your views here.
 
 def index(request):
@@ -138,8 +139,9 @@ def estimate_cost(request):
             return JsonResponse({"error": "Internal server error"}, status=500)
     return JsonResponse({"error": "Invalid request method"}, status=405)
 
-def submit_trip_review(request):
+def submit_trip_review(request, pk):
     if request.user.is_authenticated:
+        place = PlaceMode.objects.get(id=pk)
         if request.method == "POST":
             title = request.POST.get("title")
             description = request.POST.get("description")
@@ -156,12 +158,13 @@ def submit_trip_review(request):
                 travel_cost=travel_cost,
                 accommodation_cost=accommodation_cost,
                 food_cost=food_cost,
-                user=request.user
+                user=request.user,
+                place=place
             )
 
             messages.success(request, "Your trip review has been submitted!")
-            return redirect("submit_trip_review")  # Redirect to the same page or another
+            return redirect(reverse("submit_trip_review", kwargs={"pk": place.id}))  # Redirect to the same page or another
     else:
         return redirect("/login")
 
-    return render(request, "reviewform.html") 
+    return render(request, "reviewform.html", {"single_place": place}) 

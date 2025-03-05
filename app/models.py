@@ -67,6 +67,7 @@ class TripReview(models.Model):
         ('ship', 'Ship'),
     ]
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    place = models.ForeignKey(PlaceMode, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=255, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     travel_medium = models.CharField(max_length=10, choices=TRAVEL_MEDIUM_CHOICES, null=True, blank=True)

@@ -9,6 +9,6 @@ urlpatterns = [
     path('login/', views.login_view, name='login'),
     path('logout/', views.logout_view, name='logout'),
     path('estimate-cost/', views.estimate_cost, name='estimate-cost'),
-    path("submit-review/", views.submit_trip_review, name="submit_trip_review"),
-    # path('', include('app.urls'))
+    path("submit-review/<int:pk>/", views.submit_trip_review, name="submit_trip_review"),
+    # path('', include('app.urls')) 
 ]

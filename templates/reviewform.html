@@ -142,7 +142,8 @@ button i {
 </head>
 <body>
     <div class="container">
-        <form class="trip-form" method="post" action="{% url 'submit_trip_review' %}">
+        <form class="trip-form" method="post" action="{% url 'submit_trip_review' pk=single_place.id %}">
+
             {% csrf_token %}
             
             <div class="form-header">

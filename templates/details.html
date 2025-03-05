@@ -120,7 +120,9 @@
                 <div class="rating">★★★★☆</div>
                 <span>18,842 reviews</span> · <a href="#">#4 of 477 things to do in Honolulu</a> · Beaches
             </div>
-            <a href="#" class="write-review">Write a review</a>
+            <a href="/submit-review/{{single_place.id}}/" class="write-review">Write a review</a>
+            {% comment %} <a href="{% url 'submit_trip_review' pk=place.id %}">Submit Review</a> {% endcomment %}
+
         </div>
 
         <div class="content">
