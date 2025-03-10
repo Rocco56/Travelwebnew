@@ -172,3 +172,33 @@ def submit_trip_review(request, pk):
         return redirect("/login")
 
     return render(request, "reviewform.html", {"single_place": place}) 
+
+def create_profile(request):
+    if request.method == "POST":
+        full_name = request.POST.get("name")
+        description = request.POST.get("description")
+        state = request.POST.get("state")
+
+        if not full_name or not description or not state:
+            messages.error(request, "All fields are required.")
+            return redirect("create_profile")
+
+        user = request.user if request.user.is_authenticated else None
+
+        profile, created = ProfileModel.objects.get_or_create(user=user)
+        profile.state = state
+        profile.description = description
+        profile.save()
+
+        messages.success(request, "Profile created successfully!")
+        return redirect("/")
+
+    return render(request, "profile_form.html")
+
+
+def profile(request):
+    if request.user.is_authenticated:
+        profile = ProfileModel.objects.get(user=request.user)
+        reviews = TripReview.objects.filter(user=request.user)
+        review_count = reviews.count()
+        return render(request, "profilepage.html", {"profile": profile, "reviews": reviews, "count": review_count})

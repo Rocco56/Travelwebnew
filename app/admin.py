@@ -31,3 +31,4 @@ class CrowdAdmin(ImportExportModelAdmin):
 admin.site.register(CrowdModel, CrowdAdmin)
 admin.site.register(ReviewModel)
 admin.site.register(TripReview)
+admin.site.register(ProfileModel)

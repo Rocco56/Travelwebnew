@@ -80,4 +80,14 @@ class TripReview(models.Model):
     def __str__(self):
         return self.title
 
+class ProfileModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    review = models.ForeignKey(TripReview, on_delete=models.CASCADE, null=True, blank=True)
+    state = models.CharField(max_length=200, null=True, blank=True)
+    trophies = models.IntegerField(null=True, blank=True)
+    description = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username  
+
 
