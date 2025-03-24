@@ -539,10 +539,10 @@ body {
 
             <div class="nav-links-box-2">
                 <div class="nav-links">
-                    <a href="/" class="active">Home</a>
-                    <a href="/about">About</a>
-                    <a href="/explore">Explore</a>
-                    <a href="/stories">Travel Stories</a>
+                    <a href="#" class="active">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Explore</a>
+                    <a href="#">Travel Stories</a>
                 </div>
                 {% if user.is_authenticated %}
                 <button class="nav-button">
@@ -560,108 +560,6 @@ body {
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Discover Incredible India</h1>
-            <p>From the majestic Himalayas to serene backwaters, experience the diversity of India</p>
-            <div class="search-container">
-                <form method="get" action="{% url 'search' %}">
-                    <div class="search-box">
-                        <div class="search-input">
-                            <i class="fa-solid fa-location-dot"></i>
-                            <input type="text" name="q" value="{{ query }}" placeholder="Search for specific destinations, hotels, or activities">
-                        </div>
-                        <div class="filter-toggle" onclick="toggleFilters()">
-                            <i class="fa-solid fa-sliders"></i>
-                            Filters
-                        </div>
-                        <button type="submit" class="search-button">
-                            <i class="fa-solid fa-search"></i>
-                            Search
-                        </button>
-                    </div>
-                
-                    <div class="search-filters" id="searchFilters">
-                        <div class="filter-group">
-                            <label>State</label>
-                            <select name="state">
-                                <option value="">Select State</option>
-                                <option value="maharashtra" {% if state == 'maharashtra' %}selected{% endif %}>Maharashtra</option>
-                                <option value="rajasthan" {% if state == 'rajasthan' %}selected{% endif %}>Rajasthan</option>
-                                <option value="kerala" {% if state == 'kerala' %}selected{% endif %}>Kerala</option>
-                                <option value="gujarat" {% if state == 'gujarat' %}selected{% endif %}>Gujarat</option>
-                                <option value="karnataka" {% if state == 'karnataka' %}selected{% endif %}>Karnataka</option>
-                            </select>
-                        </div>
-                
-                        <div class="filter-group">
-                            <label>Place Type</label>
-                            <select name="type">
-                                <option value="">Select Type</option>
-                                <option value="beach" {% if type == 'beach' %}selected{% endif %}>Beaches</option>
-                                <option value="mountain" {% if type == 'mountain' %}selected{% endif %}>Mountains</option>
-                                <option value="heritage" {% if type == 'heritage' %}selected{% endif %}>Heritage Sites</option>
-                                <option value="wildlife" {% if type == 'wildlife' %}selected{% endif %}>Wildlife</option>
-                                <option value="pilgrimage" {% if type == 'pilgrimage' %}selected{% endif %}>Pilgrimage</option>
-                            </select>
-                        </div>
-                
-                        <div class="filter-group">
-                            <label>Budget Range</label>
-                            <select name="budget">
-                                <option value="">Select Budget</option>
-                                <option value="budget" {% if budget == 'budget' %}selected{% endif %}>Budget (Under ₹10,000)</option>
-                                <option value="mid" {% if budget == 'mid' %}selected{% endif %}>Mid-Range (₹10,000 - ₹25,000)</option>
-                                <option value="luxury" {% if budget == 'luxury' %}selected{% endif %}>Luxury (Above ₹25,000)</option>
-                            </select>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- Popular Destinations -->
-    <section class="destinations">
-        <div class="container">
-            <div class="section-header">
-                <h2>Popular Destinations</h2>
-                <p>Explore the most loved places in India</p>
-            </div>
-            <div class="destination-grid">
-                <div class="destination-card large">
-                    <img src="https://images.unsplash.com/photo-1514222134-b57cbb8ce073?ixlib=rb-4.0.3" alt="Taj Mahal">
-                    <div class="card-content">
-                        <h3>Agra</h3>
-                        <p>Home to the magnificent Taj Mahal</p>
-                    </div>
-                </div>
-                <div class="destination-card">
-                    <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-4.0.3"
-                        alt="Varanasi">
-                    <div class="card-content">
-                        <h3>Varanasi</h3>
-                        <p>The spiritual heart of India</p>
-                    </div>
-                </div>
-                <div class="destination-card">
-                    <img src="https://images.unsplash.com/photo-1567157577867-05ccb1388e66?ixlib=rb-4.0.3" alt="Jaipur">
-                    <div class="card-content">
-                        <h3>Jaipur</h3>
-                        <p>The Pink City of Rajasthan</p>
-                    </div>
-                </div>
-                <div class="destination-card large">
-                    <img src="https://images.unsplash.com/photo-1514222134-b57cbb8ce073?ixlib=rb-4.0.3" alt="Taj Mahal">
-                    <div class="card-content">
-                        <h3>Amritsar</h3>
-                        <p>Home to the magnificent Gurudwara</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Experiences Section -->
     <section class="experiences">
         <div class="container">

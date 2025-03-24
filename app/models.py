@@ -39,7 +39,7 @@ class CrowdModel(models.Model):
     month_name = models.CharField(max_length=200, null=True, blank=True)
 
     class Meta:
-        unique_together = ('location', 'month')  # Ensure unique crowd data for each month/year and location
+        unique_together = ('location', 'month')
 
     def __str__(self):
         return f"Crowd data for {self.location} in {self.month_name}" 
@@ -56,7 +56,6 @@ class ReviewModel(models.Model):
 
     def __str__(self):
         return f"user {self.user.username}'s review to {self.place.Name}"
-
 
 class TripReview(models.Model):
     TRAVEL_MEDIUM_CHOICES = [

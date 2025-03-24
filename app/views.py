@@ -17,7 +17,7 @@ from django.urls import reverse
 def index(request):
     user = request.user
     places = PlaceMode.objects.all()
-    return render(request, 'bharat-site.html', {"places" : places[0: 10], 'user': user})
+    return render(request, 'bharat-site.html', {"places" : places[0: 3], 'user': user})
 
 def details(request, pk):
     place = PlaceMode.objects.get(id=pk)
@@ -65,7 +65,7 @@ def search_view(request):
 
     return render(
         request,
-        'search.html',
+        'search-page.html',
         {'places': results, 'query': query, 'state': state, 'type': place_type}
     )
 
@@ -99,7 +99,7 @@ def login_view(request):
             return redirect('index')
         else:
             messages.error(request, 'user does not exists')
-            return redirect('/login')
+            return redirect('/create-profile')
     return render(request, 'login.html')
 
 # Logout View
@@ -204,7 +204,13 @@ def create_profile(request):
 
 def profile(request):
     if request.user.is_authenticated:
+        if not ProfileModel.objects.filter(user=request.user).exists():
+            return redirect("/create-profile")
         profile = ProfileModel.objects.get(user=request.user)
-        reviews = TripReview.objects.filter(user=request.user)
-        review_count = reviews.count()
+        reviews = None
+        review_count = 0
+        if TripReview.objects.filter(user=request.user).exists():
+            reviews = TripReview.objects.filter(user=request.user)
+            review_count = reviews.count()
+
         return render(request, "profilepage.html", {"profile": profile, "reviews": reviews, "count": review_count})
