@@ -214,3 +214,10 @@ def profile(request):
             review_count = reviews.count()
 
         return render(request, "profilepage.html", {"profile": profile, "reviews": reviews, "count": review_count})
+
+def stories(request):
+    reviews = TripReview.objects.all()
+    return render(request, "stories.html", {"reviews": reviews})
+
+def about(request):
+    return render(request, "about.html")

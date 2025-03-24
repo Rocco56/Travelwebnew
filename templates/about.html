@@ -1,0 +1,315 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About TripAdvisor India - Your Travel Companion</title>
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<style>
+    /* Navbar Styles */
+.navbar {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: 600;
+    color:  #49b668;
+}
+
+.nav-brand i {
+    font-size: 28px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary-color);
+}
+
+.nav-button {
+    padding: 10px 24px;
+    background-color:  #49b668;
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 12px;
+}
+
+.nav-button:hover {
+    background-color: #49b668;
+    transform: translateY(-2px);
+}
+
+.nav-links-box-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nav-button a{
+    color : white;
+    text-decoration : none;
+}
+</style>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span>TripAdvisor India</span>
+            </div>
+
+            <div class="nav-links-box-2">
+                <div class="nav-links">
+                    <a href="/" class="active">Home</a>
+                    <a href="/about">About</a>
+                    <a href="/explore">Explore</a>
+                    <a href="/stories">Travel Stories</a>
+                </div>
+                {% if user.is_authenticated %}
+                <button class="nav-button">
+                    <i class="fa-solid fa-user"></i>
+                    <a href="/profile">Profile</a>
+                </button>
+                {% else %}
+                <button class="nav-button">
+                    <i class="fa-solid fa-user"></i>
+                    <a href="/sign-up">Sign In</a>
+                </button>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Discover the Heart of India</h1>
+            <p>Your trusted companion in exploring the diverse beauty and rich cultural heritage of incredible India</p>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="number">10M+</span>
+                    <span class="label">Monthly Visitors</span>
+                </div>
+                <div class="stat">
+                    <span class="number">500K+</span>
+                    <span class="label">Verified Reviews</span>
+                </div>
+                <div class="stat">
+                    <span class="number">1000+</span>
+                    <span class="label">Destinations</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <!-- Mission Section -->
+        <section class="mission-section">
+            <div class="section-header">
+                <h2>Our Mission</h2>
+                <p>Empowering travelers to explore India's wonders with confidence and authenticity</p>
+            </div>
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <i class="fas fa-compass"></i>
+                    <h3>Authentic Experiences</h3>
+                    <p>Curating genuine travel experiences that showcase India's diverse culture</p>
+                </div>
+                <div class="mission-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Community First</h3>
+                    <p>Building a trusted community of passionate travelers sharing real insights</p>
+                </div>
+                <div class="mission-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Reliable Information</h3>
+                    <p>Providing verified and up-to-date travel information you can trust</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features-section">
+            <div class="section-header">
+                <h2>Why Choose Us</h2>
+                <p>Experience travel planning like never before</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    
+                    <div class="feature-content">
+                        <h3>Expert Reviews</h3>
+                        <p>In-depth reviews from experienced travelers and local experts</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <!-- <img src="https://images.unsplash.com/photo-1587474260584-136574528ed5?ixlib=rb-4.0.3" alt="Feature"> -->
+                    <div class="feature-content">
+                        <h3>Smart Planning</h3>
+                        <p>Intelligent tools to help you plan the perfect trip</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <!-- <img src="https://images.unsplash.com/photo-1567157577867-05ccb1388e66?ixlib=rb-4.0.3" alt="Feature"> -->
+                    <div class="feature-content">
+                        <h3>Local Insights</h3>
+                        <p>Deep local knowledge and cultural understanding</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Team Section -->
+        <section class="team-section">
+            <div class="section-header">
+                <h2>Meet Our Team</h2>
+                <p>The passionate minds behind your travel experiences</p>
+            </div>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="https://i.pravatar.cc/300?img=1" alt="Team Member">
+                    </div>
+                    <div class="team-info">
+                        <h3>Priya Sharma</h3>
+                        <span>Founder & CEO</span>
+                        <p>20+ years of travel expertise across India</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="https://i.pravatar.cc/300?img=2" alt="Team Member">
+                    </div>
+                    <div class="team-info">
+                        <h3>Rajesh Kumar</h3>
+                        <span>Head of Operations</span>
+                        <p>Expert in sustainable tourism practices</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="team-card">
+                    <div class="team-image">
+                        <img src="https://i.pravatar.cc/300?img=3" alt="Team Member">
+                    </div>
+                    <div class="team-info">
+                        <h3>Sarah Wilson</h3>
+                        <span>Content Director</span>
+                        <p>Storyteller and cultural enthusiast</p>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Connect Section -->
+        <section class="connect-section">
+            <div class="connect-content">
+                <h2>Join Our Community</h2>
+                <p>Connect with fellow travelers and stay updated with the latest travel stories</p>
+                <div class="social-grid">
+                    <a href="#" class="social-card facebook">
+                        <i class="fab fa-facebook-f"></i>
+                        <span>Facebook</span>
+                    </a>
+                    <a href="#" class="social-card instagram">
+                        <i class="fab fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="#" class="social-card youtube">
+                        <i class="fab fa-youtube"></i>
+                        <span>YouTube</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+            <!-- Footer -->
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>About TripAdvisor India</h3>
+                        <p>Your trusted companion for exploring the diverse beauty of India.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Popular Destinations</h3>
+                        <ul>
+                            <li><a href="#">Goa</a></li>
+                            <li><a href="#">Rajasthan</a></li>
+                            <li><a href="#">Kerala</a></li>
+                            <li><a href="#">Himachal Pradesh</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="#">Write a Review</a></li>
+                            <li><a href="#">Add a Place</a></li>
+                            <li><a href="#">Travel Forum</a></li>
+                            <li><a href="#">Help Center</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Connect With Us</h3>
+                        <div class="social-links">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2023 TripAdvisor India. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+</body>
+</html>

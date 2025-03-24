@@ -12,6 +12,10 @@ urlpatterns = [
     path("submit-review/<int:pk>/", views.submit_trip_review, name="submit_trip_review"),
     path("create-profile/", views.create_profile, name="create_profile"),
     path("profile/", views.profile, name="profile"),
+    path("stories/", views.stories, name="stories"),
+    path("about/", views.about, name="about"),
+
+
 
     # path('', include('app.urls')) 
 ]

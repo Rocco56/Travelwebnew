@@ -76,6 +76,7 @@ class TripReview(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     no_of_people = models.IntegerField(null=True, blank=True)
     rating = models.IntegerField(null=True, blank=True)
+    image_url = models.CharField(max_length=3000, null=True, blank=True)
 
     def __str__(self):
         return self.title

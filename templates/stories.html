@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Stories - TripAdvisor India</title>
+    <link rel="stylesheet" href="{% static 'css/stories.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span>TripAdvisor India</span>
+            </div>
+            <div class="nav-links">
+                <a href="/" >Home</a>
+                <a href="/explore">Explore</a>
+                <a href="/about">About</a>
+                <a href="/stories" class="active">Travel Stories</a>
+                <button class="nav-button">
+                    <i class="fa-solid fa-user"></i>
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Travel Stories</h1>
+            <p>Discover inspiring journeys and share your own adventures</p>
+        </div>
+    </section>
+
+    <!-- Stories Grid -->
+    <div class="container">
+        <div class="stories-grid">
+            {% for i in reviews %}
+            <div class="story-card">
+                <img src={{i.image_url}} alt="Kerala Backwaters">
+                <div class="story-content">
+                    <div class="story-header">
+                        <div class="author">
+                            <img src="https://i.pravatar.cc/40?img=2" alt="Author">
+                            <span>{{i.title}}</span>
+                        </div>
+                    </div>
+                    <h3>Serenity in Kerala Backwaters</h3>
+                    <p>{{i.description}}.</p>
+                    <div class="story-tags">
+                        <span>{{i.place.City}}</span>
+                        <span>{{i.place.State}}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>About TripAdvisor India</h3>
+                    <p>Your trusted companion for exploring the diverse beauty of India.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Popular Destinations</h3>
+                    <ul>
+                        <li><a href="#">Goa</a></li>
+                        <li><a href="#">Rajasthan</a></li>
+                        <li><a href="#">Kerala</a></li>
+                        <li><a href="#">Himachal Pradesh</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Write a Review</a></li>
+                        <li><a href="#">Add a Place</a></li>
+                        <li><a href="#">Travel Forum</a></li>
+                        <li><a href="#">Help Center</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Connect With Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 TripAdvisor India. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add smooth scroll behavior for a better experience
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
