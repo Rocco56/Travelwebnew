@@ -212,8 +212,8 @@ def profile(request):
         if TripReview.objects.filter(user=request.user).exists():
             reviews = TripReview.objects.filter(user=request.user)
             review_count = reviews.count()
-
-        return render(request, "profilepage.html", {"profile": profile, "reviews": reviews, "count": review_count})
+            trophies = int(review_count / 2)
+        return render(request, "profilepage.html", { "trophies": trophies, "profile": profile, "reviews": reviews, "count": review_count})
 
 def stories(request):
     reviews = TripReview.objects.all()

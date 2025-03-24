@@ -1,6 +1,6 @@
+{% load custom_filters %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -267,7 +267,7 @@
         </div>
         <div class="profile-info">
           <h1>{{profile.user.username}}</h1>
-          <p class="location"><i class="fa-solid fa-map-marker-alt"></i> {{profile.you_State}}</p>
+          <!-- <p class="location"><i class="fa-solid fa-map-marker-alt"></i> {{profile.you_State}}</p> -->
         </div>
       </div>
 
@@ -278,24 +278,15 @@
       </div>
 
       <div class="profile-section">
-        <h2><i class="fa-solid fa-trophy"></i> Trophies</h2>
+        <h2> Trophies</h2>
         <div class="trophies-grid">
+
+          {% for i in trophies|times %}
           <div class="trophy">
             <i class="fa-solid fa-trophy"></i>
-            <span>Silver</span>
+
           </div>
-          <div class="trophy">
-            <i class="fa-solid fa-trophy"></i>
-            <span>Gold</span>
-          </div>
-          <div class="trophy">
-            <i class="fa-solid fa-trophy"></i>
-            <span>Platinum</span>
-          </div>
-          <div class="trophy">
-            <i class="fa-solid fa-trophy"></i>
-            <span>Diamond</span>
-          </div>
+          {% endfor %}
         </div>
       </div>
 
@@ -334,10 +325,10 @@
             <div class="footer-section">
                 <h3>Popular Destinations</h3>
                 <ul>
-                    <li><a href="#">Goa</a></li>
-                    <li><a href="#">Rajasthan</a></li>
-                    <li><a href="#">Kerala</a></li>
-                    <li><a href="#">Himachal Pradesh</a></li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Explore</a></li>
+                    <li><a href="#">Travel Stories</a></li>
                 </ul>
             </div>
             <div class="footer-section">
