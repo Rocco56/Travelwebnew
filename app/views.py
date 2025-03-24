@@ -17,7 +17,7 @@ from django.urls import reverse
 def index(request):
     user = request.user
     places = PlaceMode.objects.all()
-    return render(request, 'index.html', {"places" : places[0: 10], 'user': user})
+    return render(request, 'bharat-site.html', {"places" : places[0: 10], 'user': user})
 
 def details(request, pk):
     place = PlaceMode.objects.get(id=pk)
@@ -38,19 +38,36 @@ def details(request, pk):
     data = []
     reviews = TripReview.objects.filter(place=place)
     print(reviews)
-    return render(request, 'details.html', {"rec_places" : recommended_places, 'single_place' : place, 'crowd_data' : crowd_data, 'months': months, 'reviews':reviews})
+    return render(request, 'place-details.html', {"rec_places" : recommended_places, 'single_place' : place, 'crowd_data' : crowd_data, 'months': months, 'reviews':reviews})
 
 def search_view(request):
-    query = request.GET.get('q')
-    results = []
+    query = request.GET.get('q', '')
+    state = request.GET.get('state', '')
+    place_type = request.GET.get('type', '')
+
+    results = PlaceMode.objects.all()
+    print(query)
     if query:
-        results = PlaceMode.objects.filter(
+        results = results.filter(
             models.Q(Name__icontains=query) |
             models.Q(City__icontains=query) |
             models.Q(Significance__icontains=query)
         )
-    return render(request, 'search.html', {'places': results, 'query': query})
 
+    if state:
+        results = results.filter(State__iexact=state)
+
+    elif place_type:
+        results = results.filter(Type__iexact=place_type)
+
+    else:
+        results = results
+
+    return render(
+        request,
+        'search.html',
+        {'places': results, 'query': query, 'state': state, 'type': place_type}
+    )
 
 def signup_view(request):
     if request.method == 'POST':
@@ -79,12 +96,10 @@ def login_view(request):
         
         if user is not None:
             login(request, user)
-            return redirect('index')  # Replace 'home' with your desired redirect URL
+            return redirect('index')
         else:
             messages.error(request, 'user does not exists')
             return redirect('/login')
-            # return render(request, 'login.html', {'error': 'Invalid credentials'})
-    
     return render(request, 'login.html')
 
 # Logout View
@@ -92,12 +107,8 @@ def logout_view(request):
     logout(request)
     return redirect('login')
 
-
 gmaps = googlemaps.Client(key="AIzaSyAyUAkmbw3LUmZy5w15DmMFaVh3x-utvHw")
 def get_distance(origin, destination):
-    """
-    Calculate the distance between two locations using Google Maps Distance Matrix API.
-    """
     try:
         result = gmaps.distance_matrix(origins=origin, destinations=destination, mode="driving")
         element = result["rows"][0]["elements"][0]
@@ -112,9 +123,6 @@ def get_distance(origin, destination):
 
 @csrf_exempt
 def estimate_cost(request):
-    """
-    API to estimate travel cost.
-    """
     if request.method == "POST":
         try:
             data = json.loads(request.body)
@@ -170,7 +178,6 @@ def submit_trip_review(request, pk):
             return redirect(reverse("submit_trip_review", kwargs={"pk": place.id}))  # Redirect to the same page or another
     else:
         return redirect("/login")
-
     return render(request, "reviewform.html", {"single_place": place}) 
 
 def create_profile(request):
@@ -194,7 +201,6 @@ def create_profile(request):
         return redirect("/")
 
     return render(request, "profile_form.html")
-
 
 def profile(request):
     if request.user.is_authenticated:

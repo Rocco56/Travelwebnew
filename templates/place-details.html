@@ -1,0 +1,312 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taj Mahal - Wonder of the World</title>
+    <link rel="stylesheet" href="{% static 'css/place-details.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+</head>
+<style>
+    .navbar {
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.nav-brand i {
+    font-size: 28px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary-color);
+}
+
+.nav-button {
+    padding: 10px 24px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 12px;
+}
+
+.nav-button:hover {
+    background-color: #33a25c;
+    transform: translateY(-2px);
+}
+
+.nav-links-box-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hero-section{
+    margin-top: 7%;
+}
+
+</style>
+<body>
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span>TripAdvisor India</span>
+            </div>
+
+            <div class="nav-links-box-2">
+                <div class="nav-links">
+                    <a href="#" class="active">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Explore</a>
+                    <a href="#">Travel Stories</a>
+                </div>
+                <button class="nav-button">
+                    <i class="fa-solid fa-user"></i>
+                    Sign In
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <div class="place-info">
+                <h1>{{single_place.Name}}</h1>
+                <div class="rating-info">
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.5</span>
+                    </div>
+                    <span class="review-count">(2,345 reviews)</span>
+                </div>
+                <p class="description">
+                    {{single_place.Description}}
+                </p>
+               
+
+                <h3>Travel Cost Estimator</h3>
+                <button class="estimate-button" onclick="estimateTravelCost('{{ single_place.Name }}')">Estimate Cost</button>
+                <p id="cost-display">Travel cost will be displayed here.</p>
+                    </div>
+
+
+            <div class="place-image">
+                <img src="{{single_place.Image_url}}" alt="Taj Mahal">
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="about-section">
+            <div class="about-content">
+                <div class="nearby-attractions">
+                    <h3>Nearby Attractions</h3>
+                    <ul>
+                        {% for i in rec_places %}
+                        <li>
+                            <i class="fas fa-landmark"></i>
+                            <div>
+                                <h4>{{i.Name}}</h4>
+                                <p>2.5 km away • Historical Fort</p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                       
+                    </ul>
+                </div>
+             
+            </div>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.400553850174!2d78.04215!3d27.175015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1696486400000!5m2!1sen!2sin"
+                    allowfullscreen="" 
+                    loading="lazy">
+                </iframe>
+            </div>
+        </div>
+
+        <!-- Visitor Map -->
+        <div class="visitor-section">
+            <h2>Visitor Traffic by Month</h2>
+            <div class="month-map">
+                {% for i in crowd_data %}
+                {% if i.crowd_count == 1 %}
+                <div class="month" style="background-color: rgba(52, 224, 161, 0.2);">
+                    <span>{{i.month_name}}</span>
+                    <small>Very Low</small>
+                </div>
+                {% elif i.crowd_count == 2 %}
+                <div class="month" style="background-color: rgba(52, 224, 161, 0.2);">
+                    <span>{{i.month_name}}</span>
+                    <small>Low</small>
+                </div>
+                {% elif i.crowd_count == 3 %}
+                <div class="month" style="background-color: rgba(52, 224, 161, 0.6);">
+                    <span>{{i.month_name}}</span>
+                    <small>Medium</small>
+                </div>
+                {% elif i.crowd_count == 4 %}
+                <div class="month" style="background-color: rgba(52, 224, 161, 0.8);">
+                    <span>{{i.month_name}}</span>
+                    <small>High</small>
+                </div>
+                {% elif i.crowd_count == 5 %}
+                <div class="month" style="background-color: rgba(52, 224, 161, 0.9);">
+                    <span>{{i.month_name}}</span>
+                    <small>Very High</small>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="comments-section">
+            
+            <div class="comments-list">
+                {% for i in reviews %}
+                <div class="comment-card">
+                    <div class="comment-header">
+                        <div class="commenter-info">
+                            <img src="https://i.pravatar.cc/40?img=1" alt="User">
+                            <div>
+                                <h4>{{i.title}}</h4>
+                                <div class="comment-stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <span class="comment-date">Oct 15, 2023</span>
+                    </div>
+                    <p>{{i.description}}</p>
+
+                    <p><b>Travel Medium <b/>  : {{i.travel_medium}}</p>
+                        <p><b>Travel Cost <b/>  : {{i.travel_cost}}</p>
+                        <p><b>Food cost <b/>  : {{i.food_cost}}</p>
+                            {% comment %} <p>{{i.accommodation_cost}}</p> {% endcomment %}
+    
+                </div>
+                {% endfor %}
+              
+            </div>
+        </div>
+    </div>
+
+    <script>
+ function getCurrentLocation(callback) {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+                callback({ lat: latitude, lng: longitude });
+            },
+            (error) => {
+                console.error(error.message);
+                alert("Unable to fetch your location. Please allow location access.");
+            }
+        );
+    } else {
+        alert("Geolocation is not supported by your browser.");
+    }
+}
+
+function estimateTravelCost(destination) {
+    // Show loader
+    document.getElementById('cost-display').innerHTML = `
+        <div class="loader-container">
+            <div class="loader"></div>
+            <p>Calculating travel cost...</p>
+        </div>
+    `;
+
+    getCurrentLocation((currentLocation) => {
+        fetch('/estimate-cost/', {
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}", // Ensure CSRF token is included       
+            },
+            body: JSON.stringify({
+                origin: `${currentLocation.lat},${currentLocation.lng}`,
+                destination: destination
+            })
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.car_cost && data.train_cost && data.air_cost) {
+                // Hide loader and show results
+                document.getElementById('cost-display').innerHTML = `
+                    <div class="travel-cost">
+                        <p><span class="mode">🚗 Car:</span> <span class="price">₹${data.car_cost}</span></p>
+                        <p><span class="mode">🚆 Train:</span> <span class="price">₹${data.train_cost}</span></p>
+                        <p><span class="mode">✈️ Airplane:</span> <span class="price">₹${data.air_cost}</span></p>
+                    </div>
+                `;
+            } else {
+                document.getElementById('cost-display').innerHTML = "<p style='color:red;'>Unable to calculate cost. Please try again.</p>";
+            }
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            document.getElementById('cost-display').innerHTML = "<p style='color:red;'>Something went wrong. Please try again.</p>";
+        });
+    });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const destination = "{{single_place.Name}}"; // Set dynamically
+    {% comment %} estimateTravelCost(destination); {% endcomment %}
+});
+
+    </script>
+</body>
+</html>
