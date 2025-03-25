@@ -5,26 +5,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Travel Stories - TripAdvisor India</title>
-    <link rel="stylesheet" href="{% static 'css/stories.css' %}">
+    <title>TripAdvisor Explore</title>
+    <link rel="stylesheet" href="{% static 'css/explore-styles.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-</head>
-<style>
-            :root {
+
+    <style>
+        .places-grid{
+            max-width: none;
+        }
+        :root {
     --primary-color: #49b668;
     --secondary-color: #33a25c;
     --text-color: #333;
     --light-gray: #f5f5f5;
     --border-radius: 12px;
 }
-.story-card{
-    box-shadow: none;
-}
-    .navbar .container{
+.navbar .container{
     max-width: 1200px;
     margin: auto;
 }
-/* Navbar Styles */
+        /* Navbar Styles */
 .navbar {
     background: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -100,10 +100,10 @@
     color: white;
     text-decoration: none;
 }
-</style>
+    </style>
+</head>
+
 <body>
-    <!-- Navbar -->
-    <!-- Navbar -->
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
@@ -132,39 +132,33 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Travel Stories</h1>
-            <p>Discover inspiring journeys and share your own adventures</p>
-        </div>
-    </section>
-
-    <!-- Stories Grid -->
-    <div class="container">
-        <div class="stories-grid">
-            {% for i in reviews %}
-            <div class="story-card">
-                <img src={{i.image_url}} alt="Kerala Backwaters">
-                <div class="story-content">
-                    <div class="story-header">
-                        <div class="author">
-                            <img src="https://i.pravatar.cc/40?img=2" alt="Author">
-                            <span>{{i.title}}</span>
-                        </div>
-                    </div>
-                    <h3>Serenity in Kerala Backwaters</h3>
-                    <p>{{i.description}}.</p>
-                    <div class="story-tags">
-                        <span>{{i.place.City}}</span>
-                        <span>{{i.place.State}}</span>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
+    <div class="search-container">
+        <div class="search-wrapper">
+            <h1>Explore Amazing Places</h1>
         </div>
     </div>
-    <!-- Footer -->
+
+    <div class="places-grid">
+
+        {% for i in places %}
+        <div class="place-card">
+            <a href="/details/{{i.id}}">
+            <img src={{i.Image_url}}
+                alt="Image">
+            <div class="place-overlay">
+                <h2>{{i.Name}}</h2>
+                <div class="place-details">
+                    <span class="category-tag">{{i.Type}}</span>
+                    <!-- <div class="rating"><span class="stars">★★★★★</span> 4.8</div> -->
+                    <p>{{i.City}}, {{i.State}}</p>
+                </div>
+            </div>
+        </a>
+        </div>
+        {% endfor %}
+
+    </div>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-content">
@@ -205,18 +199,6 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        // Add smooth scroll behavior for a better experience
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-    </script>
 </body>
 
 </html>

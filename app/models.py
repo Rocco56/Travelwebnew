@@ -28,7 +28,7 @@ class Profile(models.Model):
     you_State = models.CharField(max_length=200, null=True, blank=True)
     fav_type = models.CharField(max_length=200, null=True, blank=True)
     fav_significance  = models.CharField(max_length=200, null=True, blank=True)
-
+    description = models.TextField(null=True, blank=True)
     def __str__(self):
         return self.user.username
 

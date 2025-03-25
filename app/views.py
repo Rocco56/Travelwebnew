@@ -82,7 +82,7 @@ def signup_view(request):
         if password1 == password2:
             user = User.objects.create_user(username=username, email=email, password=password1)
             user.save()
-            return redirect('/')
+            return redirect('/create-profile')
         else:
             return render(request, 'signup.html', {'error': 'Passwords do not match'})
     return render(request, 'signup.html')
@@ -209,6 +209,7 @@ def profile(request):
         profile = ProfileModel.objects.get(user=request.user)
         reviews = None
         review_count = 0
+        trophies = 0
         if TripReview.objects.filter(user=request.user).exists():
             reviews = TripReview.objects.filter(user=request.user)
             review_count = reviews.count()
@@ -221,3 +222,7 @@ def stories(request):
 
 def about(request):
     return render(request, "about.html")
+
+def explore(request):
+    places = PlaceMode.objects.all()
+    return render(request, "explore-page.html", {'places': places})

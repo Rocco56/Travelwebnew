@@ -534,7 +534,7 @@ body {
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <span>TripAdvisor India</span>
+                <span>TripInsight</span>
             </div>
 
             <div class="nav-links-box-2">
@@ -552,7 +552,7 @@ body {
                 {% else %}
                 <button class="nav-button">
                     <i class="fa-solid fa-user"></i>
-                    <a href="/sign-up">Sign In</a>
+                    <a href="/signup">Sign In</a>
                 </button>
                 {% endif %}
             </div>
@@ -591,6 +591,45 @@ body {
                                 <option value="kerala" {% if state == 'kerala' %}selected{% endif %}>Kerala</option>
                                 <option value="gujarat" {% if state == 'gujarat' %}selected{% endif %}>Gujarat</option>
                                 <option value="karnataka" {% if state == 'karnataka' %}selected{% endif %}>Karnataka</option>
+                                <option value="Odisha" {% if state == 'karnataka' %}selected{% endif %}>Karnataka</option>
+                                <option value="Madhya pradesh" {% if state == 'karnataka' %}selected{% endif %}>Karnataka</option>
+                                <option value="Utter Pradesh" {% if state == 'karnataka' %}selected{% endif %}>Karnataka</option>
+                                <option value="" {% if state == 'karnataka' %}selected{% endif %}>Karnataka</option>
+                                <option value="karnataka" {% if state == 'karnataka' %}selected{% endif %}>Karnataka</option>
+                                <option value="karnataka" {% if state == 'karnataka' %}selected{% endif %}>Karnataka</option>
+                            
+                                <!-- All remaining Indian states -->
+                                <option value="andhra_pradesh" {% if state == 'andhra_pradesh' %}selected{% endif %}>Andhra Pradesh</option>
+                                <option value="arunachal_pradesh" {% if state == 'arunachal_pradesh' %}selected{% endif %}>Arunachal Pradesh</option>
+                                <option value="assam" {% if state == 'assam' %}selected{% endif %}>Assam</option>
+                                <option value="bihar" {% if state == 'bihar' %}selected{% endif %}>Bihar</option>
+                                <option value="chhattisgarh" {% if state == 'chhattisgarh' %}selected{% endif %}>Chhattisgarh</option>
+                                <option value="goa" {% if state == 'goa' %}selected{% endif %}>Goa</option>
+                                <option value="haryana" {% if state == 'haryana' %}selected{% endif %}>Haryana</option>
+                                <option value="himachal_pradesh" {% if state == 'himachal_pradesh' %}selected{% endif %}>Himachal Pradesh</option>
+                                <option value="jharkhand" {% if state == 'jharkhand' %}selected{% endif %}>Jharkhand</option>
+                                <option value="manipur" {% if state == 'manipur' %}selected{% endif %}>Manipur</option>
+                                <option value="meghalaya" {% if state == 'meghalaya' %}selected{% endif %}>Meghalaya</option>
+                                <option value="mizoram" {% if state == 'mizoram' %}selected{% endif %}>Mizoram</option>
+                                <option value="nagaland" {% if state == 'nagaland' %}selected{% endif %}>Nagaland</option>
+                                <option value="punjab" {% if state == 'punjab' %}selected{% endif %}>Punjab</option>
+                                <option value="sikkim" {% if state == 'sikkim' %}selected{% endif %}>Sikkim</option>
+                                <option value="tamil_nadu" {% if state == 'tamil_nadu' %}selected{% endif %}>Tamil Nadu</option>
+                                <option value="telangana" {% if state == 'telangana' %}selected{% endif %}>Telangana</option>
+                                <option value="tripura" {% if state == 'tripura' %}selected{% endif %}>Tripura</option>
+                                <option value="uttarakhand" {% if state == 'uttarakhand' %}selected{% endif %}>Uttarakhand</option>
+                                <option value="west_bengal" {% if state == 'west_bengal' %}selected{% endif %}>West Bengal</option>
+                            
+                                <!-- Union Territories -->
+                                <option value="andaman_nicobar" {% if state == 'andaman_nicobar' %}selected{% endif %}>Andaman and Nicobar Islands</option>
+                                <option value="chandigarh" {% if state == 'chandigarh' %}selected{% endif %}>Chandigarh</option>
+                                <option value="dadra_nagar_haveli" {% if state == 'dadra_nagar_haveli' %}selected{% endif %}>Dadra and Nagar Haveli</option>
+                                <option value="daman_diu" {% if state == 'daman_diu' %}selected{% endif %}>Daman and Diu</option>
+                                <option value="lakshadweep" {% if state == 'lakshadweep' %}selected{% endif %}>Lakshadweep</option>
+                                <option value="delhi" {% if state == 'delhi' %}selected{% endif %}>Delhi</option>
+                                <option value="puducherry" {% if state == 'puducherry' %}selected{% endif %}>Puducherry</option>
+                                <option value="ladakh" {% if state == 'ladakh' %}selected{% endif %}>Ladakh</option>
+                                <option value="jammu_kashmir" {% if state == 'jammu_kashmir' %}selected{% endif %}>Jammu and Kashmir</option>
                             </select>
                         </div>
                 
@@ -606,7 +645,7 @@ body {
                             </select>
                         </div>
                 
-                        <div class="filter-group">
+                        {% comment %} <div class="filter-group">
                             <label>Budget Range</label>
                             <select name="budget">
                                 <option value="">Select Budget</option>
@@ -614,7 +653,7 @@ body {
                                 <option value="mid" {% if budget == 'mid' %}selected{% endif %}>Mid-Range (₹10,000 - ₹25,000)</option>
                                 <option value="luxury" {% if budget == 'luxury' %}selected{% endif %}>Luxury (Above ₹25,000)</option>
                             </select>
-                        </div>
+                        </div> {% endcomment %}
                     </div>
                 </form>
             </div>

@@ -362,14 +362,30 @@ a{
     text-decoration: none;
     color: black;
 }
-
+.button a{
+    padding: 2%;
+    background-color: #34a554;
+    margin-bottom: 4%;
+    color: white;
+    border-radius: 5px;
+}
+.button{
+    margin-bottom: 4%;
+}
+.comments-section{
+    box-shadow: none;
+}
+.comment-card{
+    box-shadow: none;
+    border-radius: 1px solid rgb(207, 207, 207);
+}
 </style>
 <body>
 
     <nav class="navbar">
         <div class="container">
             <div class="nav-brand">
-                <span>TripAdvisor India</span>
+                <span>TripInsight</span>
             </div>
 
             <div class="nav-links-box-2">
@@ -485,7 +501,7 @@ a{
 
         <!-- Comments Section -->
         <div class="comments-section">
-            
+            <div class="button"><a href="/submit-review/{{single_place.id}}">write review</a></div>
             <div class="comments-list">
                 {% for i in reviews %}
                 <div class="comment-card">
