@@ -82,6 +82,8 @@ def signup_view(request):
         if password1 == password2:
             user = User.objects.create_user(username=username, email=email, password=password1)
             user.save()
+            login(request, user)
+
             return redirect('/create-profile')
         else:
             return render(request, 'signup.html', {'error': 'Passwords do not match'})
@@ -96,7 +98,7 @@ def login_view(request):
         
         if user is not None:
             login(request, user)
-            return redirect('index')
+            return redirect('/')
         else:
             messages.error(request, 'user does not exists')
             return redirect('/create-profile')

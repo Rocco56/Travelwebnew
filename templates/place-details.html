@@ -2,6 +2,7 @@
 {% load custom_filters %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,375 +12,413 @@
 </head>
 <style>
     .navbar {
-    background: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-.month-map{
-    grid-template-columns: repeat(auto-fit, minmax(156px, 1fr));
-}
-.month span{
-    font-weight: 500;
-    font-size: 1.2rem;
-}
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 70px;
-}
-
-.nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 24px;
-    font-weight: 600;
-    color: #49b668;
-}
-
-.nav-brand i {
-    font-size: 28px;
-}
-
-.nav-links {
-    display: flex;
-    gap: 32px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-    color: #49b668;
-}
-
-.nav-button {
-    padding: 10px 24px;
-    background-color: #49b668;
-    color: white;
-    border: none;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: 12px;
-}
-
-.nav-button:hover {
-    background-color: #49b668;
-    transform: translateY(-2px);
-}
-
-.nav-links-box-2{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.hero-section{
-    margin-top: 7%;
-}
-
-/* Footer */
-.footer {
-    background: #333;
-    color: white;
-    padding: 80px 0 20px;
-}
-
-.footer-content {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    margin-bottom: 60px;
-}
-
-.footer-section h3 {
-    font-size: 20px;
-    margin-bottom: 20px;
-    color: var(--secondary-color);
-}
-
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section ul li {
-    margin-bottom: 12px;
-}
-
-.footer-section ul a {
-    color: #ccc;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer-section ul a:hover {
-    color: var(--secondary-color);
-}
-
-.social-links {
-    display: flex;
-    gap: 16px;
-}
-
-.social-links a {
-    color: white;
-    font-size: 20px;
-    transition: all 0.3s ease;
-}
-
-.social-links a:hover {
-    color: var(--secondary-color);
-    transform: translateY(-2px);
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 20px;
-    border-top: 1px solid #444;
-    color: #888;
-}
-.estimate-button{
-    padding: 2%;
-    margin-top: 2%;
-    background-color: #49b668;
-    border: none;
-    color: white;
-    border-radius: 2px;
-}
-
-.estimate-button {
-    background: linear-gradient(135deg, #4CAF50, #2E7D32);
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.estimate-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-}
-
-#cost-display {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 10px;
-    background: #f9f9f9;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-.travel-cost p {
-    margin: 10px 0;
-    font-size: 18px;
-    color: #333;
-    font-weight: 500;
-    display: flex;
-    justify-content: space-between;
-    padding: 8px 12px;
-    border-radius: 5px;
-    transition: transform 0.3s ease;
-}
-
-.travel-cost p:hover {
-    transform: translateY(-3px);
-    background: rgba(0, 128, 0, 0.1);
-}
-
-.mode {
-    font-weight: bold;
-    color: #4CAF50;
-    margin-right: 10px;
-}
-
-.price {
-    font-size: 20px;
-    color: #FF5722;
-    font-weight: 600;
-}
-
-/* Error styling */
-#cost-display p[style*='color:red'] {
-    color: #D32F2F !important;
-    font-weight: bold;
-    animation: shake 0.4s ease-in-out;
-}
-
-/* Animations */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    25% { transform: translateX(-5px); }
-    50% { transform: translateX(5px); }
-    75% { transform: translateX(-5px); }
-}
-.comments-list b{
-    color: gray;
-    font-weight: 400;
-    padding: 2%;
-}
-.comment-card {
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    padding: 15px;
-    margin-bottom: 20px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    font-family: 'Arial', sans-serif;
-    animation: fadeIn 0.5s ease-in-out;
-}
-
-/* Hover effect for the card */
-.comment-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-}
-
-/* Header section styling */
-.comment-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    margin-bottom: 10px;
-}
-
-/* Commenter info styling */
-.commenter-info {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.commenter-info img {
-    border-radius: 50%;
-    border: 2px solid #4CAF50;
-}
-
-.commenter-info h4 {
-    margin: 0;
-    color: #333;
-    font-weight: 600;
-    font-size: 18px;
-}
-
-/* Stars styling */
-.comment-stars {
-    color: #FFD700;
-    font-size: 14px;
-}
-
-/* Date styling */
-.comment-date {
-    color: #888;
-    font-size: 14px;
-}
-
-/* Cost calc section styling */
-.cost-calc {
-    padding: 10px;
-    border-radius: 8px;
-    background: #f9f9f9;
-    transition: all 0.3s ease;
-    box-shadow: inset 0 0 15px rgba(0, 128, 0, 0.05);
-}
-
-/* Make cost details pop */
-.cost-calc p {
-    margin: 5px 0;
-    font-size: 16px;
-    color: #444;
-    line-height: 1.4;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-weight: 500;
-}
-
-/* Bolding the labels cleanly */
-.cost-calc p b {
-    color: #2E7D32;
-    font-weight: bold;
-    margin-right: 5px;
-}
-
-/* Hover effect to make cost details pop */
-.cost-calc:hover {
-    background: #e8f5e9;
-    transform: scale(1.02);
-    box-shadow: inset 0 0 10px rgba(0, 128, 0, 0.1);
-}
-.comments-list b{
-    padding: 0px;
-    font-weight: 200;
-}
-/* Fade-in animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+
+    .month-map {
+        grid-template-columns: repeat(auto-fit, minmax(156px, 1fr));
     }
-}
 
-.nav-button a{
-    color: white;
-    text-decoration: none;
-}
+    .month span {
+        font-weight: 500;
+        font-size: 1.2rem;
+    }
 
-.nearby-attractions img{
-    width: 100px;
-    height: 100px;
-    object-fit: fill;
-}
-a{
-    text-decoration: none;
-    color: black;
-}
-.button a{
-    padding: 2%;
-    background-color: #34a554;
-    margin-bottom: 4%;
-    color: white;
-    border-radius: 5px;
-}
-.button{
-    margin-bottom: 4%;
-}
-.comments-section{
-    box-shadow: none;
-}
-.comment-card{
-    box-shadow: none;
-    border-radius: 1px solid rgb(207, 207, 207);
-}
+    .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+    }
+
+    .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 24px;
+        font-weight: 600;
+        color: #49b668;
+    }
+
+    .nav-brand i {
+        font-size: 28px;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 32px;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 500;
+        transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        color: #49b668;
+    }
+
+    .nav-button {
+        padding: 10px 24px;
+        background-color: #49b668;
+        color: white;
+        border: none;
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: 12px;
+    }
+
+    .nav-button:hover {
+        background-color: #49b668;
+        transform: translateY(-2px);
+    }
+
+    .nav-links-box-2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .hero-section {
+        margin-top: 7%;
+    }
+
+    /* Footer */
+    .footer {
+        background: #333;
+        color: white;
+        padding: 80px 0 20px;
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        margin-bottom: 60px;
+    }
+
+    .footer-section h3 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: var(--secondary-color);
+    }
+
+    .footer-section ul {
+        list-style: none;
+    }
+
+    .footer-section ul li {
+        margin-bottom: 12px;
+    }
+
+    .footer-section ul a {
+        color: #ccc;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .footer-section ul a:hover {
+        color: var(--secondary-color);
+    }
+
+    .social-links {
+        display: flex;
+        gap: 16px;
+    }
+
+    .social-links a {
+        color: white;
+        font-size: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .social-links a:hover {
+        color: var(--secondary-color);
+        transform: translateY(-2px);
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid #444;
+        color: #888;
+    }
+
+    .estimate-button {
+        padding: 2%;
+        margin-top: 2%;
+        background-color: #49b668;
+        border: none;
+        color: white;
+        border-radius: 2px;
+    }
+
+    .estimate-button {
+        background: linear-gradient(135deg, #4CAF50, #2E7D32);
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .estimate-button:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    #cost-display {
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 10px;
+        background: #f9f9f9;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        font-family: 'Arial', sans-serif;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    .travel-cost p {
+        margin: 10px 0;
+        font-size: 18px;
+        color: #333;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 12px;
+        border-radius: 5px;
+        transition: transform 0.3s ease;
+    }
+
+    .travel-cost p:hover {
+        transform: translateY(-3px);
+        background: rgba(0, 128, 0, 0.1);
+    }
+
+    .mode {
+        font-weight: bold;
+        color: #4CAF50;
+        margin-right: 10px;
+    }
+
+    .price {
+        font-size: 20px;
+        color: #FF5722;
+        font-weight: 600;
+    }
+
+    /* Error styling */
+    #cost-display p[style*='color:red'] {
+        color: #D32F2F !important;
+        font-weight: bold;
+        animation: shake 0.4s ease-in-out;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes shake {
+
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+
+        25% {
+            transform: translateX(-5px);
+        }
+
+        50% {
+            transform: translateX(5px);
+        }
+
+        75% {
+            transform: translateX(-5px);
+        }
+    }
+
+    .comments-list b {
+        color: gray;
+        font-weight: 400;
+        padding: 2%;
+    }
+
+    .comment-card {
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        padding: 15px;
+        margin-bottom: 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        font-family: 'Arial', sans-serif;
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    /* Hover effect for the card */
+    .comment-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Header section styling */
+    .comment-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+        margin-bottom: 10px;
+    }
+
+    /* Commenter info styling */
+    .commenter-info {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .commenter-info img {
+        border-radius: 50%;
+        border: 2px solid #4CAF50;
+    }
+
+    .commenter-info h4 {
+        margin: 0;
+        color: #333;
+        font-weight: 600;
+        font-size: 18px;
+    }
+
+    /* Stars styling */
+    .comment-stars {
+        color: #FFD700;
+        font-size: 14px;
+    }
+
+    /* Date styling */
+    .comment-date {
+        color: #888;
+        font-size: 14px;
+    }
+
+    /* Cost calc section styling */
+    .cost-calc {
+        padding: 10px;
+        border-radius: 8px;
+        background: #f9f9f9;
+        transition: all 0.3s ease;
+        box-shadow: inset 0 0 15px rgba(0, 128, 0, 0.05);
+    }
+
+    /* Make cost details pop */
+    .cost-calc p {
+        margin: 5px 0;
+        font-size: 16px;
+        color: #444;
+        line-height: 1.4;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-weight: 500;
+    }
+
+    /* Bolding the labels cleanly */
+    .cost-calc p b {
+        color: #2E7D32;
+        font-weight: bold;
+        margin-right: 5px;
+    }
+
+    /* Hover effect to make cost details pop */
+    .cost-calc:hover {
+        background: #e8f5e9;
+        transform: scale(1.02);
+        box-shadow: inset 0 0 10px rgba(0, 128, 0, 0.1);
+    }
+
+    .comments-list b {
+        padding: 0px;
+        font-weight: 200;
+    }
+
+    /* Fade-in animation */
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .nav-button a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .nearby-attractions img {
+        width: 100px;
+        height: 100px;
+        object-fit: fill;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    .button a {
+        padding: 1%;
+        background-color: #34a554;
+        margin-bottom: 4%;
+        color: white;
+        border-radius: 5px;
+    }
+    
+    .button {
+        margin-bottom: 4%;        
+    }
+
+    .comments-section {
+        box-shadow: none;
+    }
+
+    .comment-card {
+        box-shadow: none;
+        border-radius: 1px solid rgb(207, 207, 207);
+    }
+
+    
 </style>
+
 <body>
 
     <nav class="navbar">
@@ -396,19 +435,19 @@ a{
                         <a href="/explore">Explore</a>
                         <a href="/stories">Travel Stories</a>
                     </div>
-                {% if user.is_authenticated %}
-                <button class="nav-button">
-                    <i class="fa-solid fa-user"></i>
-                    <a href="/profile">Profile</a>
-                </button>
-                {% else %}
-                <button class="nav-button">
-                    <i class="fa-solid fa-user"></i>
-                    <a href="/sign-up">Sign In</a>
-                </button>
-                {% endif %}
+                    {% if user.is_authenticated %}
+                    <button class="nav-button">
+                        <i class="fa-solid fa-user"></i>
+                        <a href="/profile">Profile</a>
+                    </button>
+                    {% else %}
+                    <button class="nav-button">
+                        <i class="fa-solid fa-user"></i>
+                        <a href="/sign-up">Sign In</a>
+                    </button>
+                    {% endif %}
+                </div>
             </div>
-        </div>
     </nav>
 
     <div class="container">
@@ -419,12 +458,12 @@ a{
                 <p class="description">
                     {{single_place.Description}}
                 </p>
-               
+
 
                 <h3>Travel Cost Estimator</h3>
                 <button class="estimate-button">Estimate Cost</button>
                 <p id="cost-display">Travel cost will be displayed here.</p>
-                </div>
+            </div>
 
 
             <div class="place-image">
@@ -439,27 +478,24 @@ a{
                     <h3>Nearby Attractions</h3>
                     <ul>
                         {% for i in rec_places %}
-                      <a href="/details/{{i.id}}">
-                        <li>
-                            <!-- <i class="fas fa-landmark"></i> -->
-                             <img src="{{i.Image_url}}" alt="">
-                            <div>
-                                <h4>{{i.Name}}</h4>
-                                <p>{{i.State}}, {{i.City}}</p>
-                            </div>
-                        </li>
-                      </a>
+                        <a href="/details/{{i.id}}">
+                            <li>
+                                <!-- <i class="fas fa-landmark"></i> -->
+                                <img src="{{i.Image_url}}" alt="">
+                                <div>
+                                    <h4>{{i.Name}}</h4>
+                                    <p>{{i.State}}, {{i.City}}</p>
+                                </div>
+                            </li>
+                        </a>
                         {% endfor %}
-                       
+
                     </ul>
                 </div>
-             
+
             </div>
             <div class="map-container">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3549.400553850174!2d78.04215!3d27.175015!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39747121d702ff6d%3A0xdd2ae4803f767dde!2sTaj%20Mahal!5e0!3m2!1sen!2sin!4v1696486400000!5m2!1sen!2sin"
-                    allowfullscreen="" 
-                    loading="lazy">
+                <iframe src={{single_place.map_url}} allowfullscreen="" loading="lazy">
                 </iframe>
             </div>
         </div>
@@ -501,13 +537,13 @@ a{
 
         <!-- Comments Section -->
         <div class="comments-section">
-            <div class="button"><a href="/submit-review/{{single_place.id}}">write review</a></div>
+            <div class="button write-review-section"><a href="/submit-review/{{single_place.id}}">write review</a></div>
             <div class="comments-list">
                 {% for i in reviews %}
                 <div class="comment-card">
                     <div class="comment-header">
                         <div class="commenter-info">
-                            <img src="https://i.pravatar.cc/40?img=1" alt="User">
+                            <img src="https://img.freepik.com/premium-vector/default-avatar-profile-icon-social-media-user-image-gray-avatar-icon-blank-profile-silhouette-vector-illustration_561158-3383.jpg" alt="User">
                             <div>
                                 <h4>{{i.title}}</h4>
                                 <div class="comment-stars">
@@ -521,17 +557,17 @@ a{
                         <span class="comment-date">Oct 15, 2023</span>
                     </div>
                     <div class="cost-calc">
-                    <p>{{i.description}}</p>
+                        <p>{{i.description}}</p>
 
-                    <p><b>Travel Medium <b/>  : {{i.travel_medium}}</p>
-                        <p><b>Travel Cost <b/>  : {{i.travel_cost}}</p>
-                        <p><b>Food cost <b/>  : {{i.food_cost}}</p>
-                            {% comment %} <p>{{i.accommodation_cost}}</p> {% endcomment %}
-    
+                        <p><b>Travel Medium <b /> : {{i.travel_medium}}</p>
+                        <p><b>Travel Cost <b /> : {{i.travel_cost}}</p>
+                        <p><b>Food cost <b /> : {{i.food_cost}}</p>
+                        {% comment %} <p>{{i.accommodation_cost}}</p> {% endcomment %}
+
+                    </div>
                 </div>
-            </div>
                 {% endfor %}
-              
+
             </div>
         </div>
     </div>
@@ -578,73 +614,74 @@ a{
     </footer>
 
     <script>
- function getCurrentLocation(callback) {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                const latitude = position.coords.latitude;
-                const longitude = position.coords.longitude;
-                callback({ lat: latitude, lng: longitude });
-            },
-            (error) => {
-                console.error(error.message);
-                alert("Unable to fetch your location. Please allow location access.");
+        function getCurrentLocation(callback) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const latitude = position.coords.latitude;
+                        const longitude = position.coords.longitude;
+                        callback({ lat: latitude, lng: longitude });
+                    },
+                    (error) => {
+                        console.error(error.message);
+                        alert("Unable to fetch your location. Please allow location access.");
+                    }
+                );
+            } else {
+                alert("Geolocation is not supported by your browser.");
             }
-        );
-    } else {
-        alert("Geolocation is not supported by your browser.");
-    }
-}
+        }
 
-function estimateTravelCost(destination) {
-    // Show loader
-    document.getElementById('cost-display').innerHTML = `
+        function estimateTravelCost(destination) {
+            // Show loader
+            document.getElementById('cost-display').innerHTML = `
         <div class="loader-container">
             <div class="loader"></div>
             <p>Calculating travel cost...</p>
         </div>
     `;
 
-    getCurrentLocation((currentLocation) => {
-        fetch('/estimate-cost/', {
-            method: 'POST',
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": "{{ csrf_token }}", // Ensure CSRF token is included       
-            },
-            body: JSON.stringify({
-                origin: `${currentLocation.lat},${currentLocation.lng}`,
-                destination: destination
-            })
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.car_cost && data.train_cost && data.air_cost) {
-                // Hide loader and show results
-                document.getElementById('cost-display').innerHTML = `
+            getCurrentLocation((currentLocation) => {
+                fetch('/estimate-cost/', {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRFToken": "{{ csrf_token }}", // Ensure CSRF token is included       
+                    },
+                    body: JSON.stringify({
+                        origin: `${currentLocation.lat},${currentLocation.lng}`,
+                        destination: destination
+                    })
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.car_cost && data.train_cost && data.air_cost) {
+                            // Hide loader and show results
+                            document.getElementById('cost-display').innerHTML = `
                     <div class="travel-cost">
                         <p><span class="mode">🚗 Car:</span> <span class="price">₹${data.car_cost}</span></p>
                         <p><span class="mode">🚆 Train:</span> <span class="price">₹${data.train_cost}</span></p>
                         <p><span class="mode">✈️ Airplane:</span> <span class="price">₹${data.air_cost}</span></p>
                     </div>
                 `;
-            } else {
-                document.getElementById('cost-display').innerHTML = "<p style='color:red;'>Unable to calculate cost. Please try again.</p>";
-            }
-        })
-        .catch((error) => {
-            console.error("Error:", error);
-            document.getElementById('cost-display').innerHTML = "<p style='color:red;'>Something went wrong. Please try again.</p>";
-        });
-    });
-}
+                        } else {
+                            document.getElementById('cost-display').innerHTML = "<p style='color:red;'>Unable to calculate cost. Please try again.</p>";
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Error:", error);
+                        document.getElementById('cost-display').innerHTML = "<p style='color:red;'>Something went wrong. Please try again.</p>";
+                    });
+            });
+        }
 
-const estimatcostbutton = document.querySelector(".estimate-button")
-estimatcostbutton.addEventListener("click", () => {
-    const destination = "{{single_place.Name}}"; // Set dynamically
-   estimateTravelCost(destination); 
-});
+        const estimatcostbutton = document.querySelector(".estimate-button")
+        estimatcostbutton.addEventListener("click", () => {
+            const destination = "{{single_place.Name}}"; // Set dynamically
+            estimateTravelCost(destination);
+        });
 
     </script>
 </body>
+
 </html>

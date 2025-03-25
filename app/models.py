@@ -8,7 +8,7 @@ class PlaceMode(models.Model):
     Zone = models.CharField(max_length=200, blank=True, null=True)
     Type = models.CharField(max_length=200, blank=True, null=True)
     State = models.CharField(max_length=200, null=True, blank=True)
-    Description = models.CharField(max_length=200, null=True, blank=True)
+    Description = models.CharField(max_length=1000, null=True, blank=True)
     Year = models.CharField(max_length=200, null=True, blank=True)
     Time_needed = models.CharField(max_length=200, null=True, blank=True)
     Google_rating = models.CharField(max_length=200, null=True, blank=True)
