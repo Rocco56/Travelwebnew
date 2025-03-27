@@ -549,10 +549,20 @@ body {
                     <i class="fa-solid fa-user"></i>
                     <a href="/profile">Profile</a>
                 </button>
+                <button class="nav-button">
+                    {% comment %} <i class="fa-solid fa-user"></i> {% endcomment %}
+                    <a href="/logout">Logout</a>
+                </button>
                 {% else %}
                 <button class="nav-button">
                     <i class="fa-solid fa-user"></i>
-                    <a href="/signup">Sign In</a>
+                    <a href="/signup">Sign Up</a>
+                    
+                </button>
+                <button class="nav-button">
+                    <i class="fa-solid fa-user"></i>
+                    <a href="/login">Log In</a>
+                    
                 </button>
                 {% endif %}
             </div>

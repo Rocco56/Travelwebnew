@@ -1,204 +1,332 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>TripAdvisor Explore</title>
-    <link rel="stylesheet" href="{% static 'css/explore-styles.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/explore-styles.css' %}" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
 
     <style>
-        .places-grid{
-            max-width: none;
+      :root {
+        --primary-color: #49b668;
+        --secondary-color: #33a25c;
+        --text-color: #333;
+        --light-gray: #f5f5f5;
+        --border-radius: 12px;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      body {
+        background-color: #fff;
+        color: var(--text-color);
+      }
+      .container {
+        max-width: 1200px;
+        margin: auto;
+        padding: 0 20px;
+      }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      /* Navbar Styles */
+      .navbar {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: fixed;
+        width: 100%;
+        top: 0;
+        z-index: 1000;
+      }
+      .navbar .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 70px;
+      }
+      .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 24px;
+        font-weight: 600;
+        color: var(--primary-color);
+      }
+      .nav-brand i {
+        font-size: 28px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 32px;
+      }
+      .nav-links a {
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--primary-color);
+      }
+      .nav-button {
+        padding: 10px 24px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: var(--border-radius);
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        margin-left: 12px;
+      }
+      .nav-button:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-2px);
+      }
+      .nav-button a {
+        color: white;
+        text-decoration: none;
+      }
+      .nav-links-box-2 {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      /* Hero Section (Search/Intro) */
+      .search-container {
+        padding: 140px 20px 40px; /* extra top padding for fixed navbar */
+        text-align: center;
+        color: white;
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url("https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-4.0.3")
+            center/cover;
+      }
+      .search-wrapper h1 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        color: var(--primary-color);
+      }
+      /* Places Grid */
+      .places-grid {
+        max-width: none;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        padding: 40px 20px;
+      }
+      .place-card {
+        position: relative;
+        overflow: hidden;
+        border-radius: var(--border-radius);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      .place-card:hover {
+        transform: translateY(-5px);
+      }
+      .place-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        display: block;
+      }
+      .place-overlay {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+        color: white;
+        padding: 10px 15px;
+      }
+      .place-overlay h2 {
+        margin-bottom: 8px;
+        font-size: 20px;
+      }
+      .place-details {
+        font-size: 14px;
+      }
+      .place-details .category-tag {
+        background: var(--primary-color);
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-right: 8px;
+        font-size: 12px;
+      }
+      /* Footer */
+      .footer {
+        background: #333;
+        color: white;
+        padding: 60px 0 20px;
+      }
+      .footer .container {
+        display: block;
+      }
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 40px;
+        margin-bottom: 30px;
+      }
+      .footer-section h3 {
+        font-size: 20px;
+        margin-bottom: 20px;
+        color: var(--secondary-color);
+      }
+      .footer-section ul {
+        list-style: none;
+      }
+      .footer-section ul li {
+        margin-bottom: 12px;
+      }
+      .footer-section ul a {
+        color: #ccc;
+        transition: color 0.3s ease;
+      }
+      .footer-section ul a:hover {
+        color: var(--primary-color);
+      }
+      .social-links {
+        display: flex;
+        gap: 16px;
+      }
+      .social-links a {
+        color: white;
+        font-size: 20px;
+        transition: all 0.3s ease;
+      }
+      .social-links a:hover {
+        color: var(--secondary-color);
+        transform: translateY(-2px);
+      }
+      .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid #444;
+        color: #888;
+      }
+      /* Responsive */
+      @media (max-width: 768px) {
+        .search-wrapper h1 {
+          font-size: 28px;
         }
-        :root {
-    --primary-color: #49b668;
-    --secondary-color: #33a25c;
-    --text-color: #333;
-    --light-gray: #f5f5f5;
-    --border-radius: 12px;
-}
-.navbar .container{
-    max-width: 1200px;
-    margin: auto;
-}
-        /* Navbar Styles */
-.navbar {
-    background: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
-
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 70px;
-}
-
-.nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--primary-color);
-}
-
-.nav-brand i {
-    font-size: 28px;
-}
-
-.nav-links {
-    display: flex;
-    gap: 32px;
-}
-
-.nav-links a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-    color: var(--primary-color);
-}
-
-.nav-button {
-    padding: 10px 24px;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: var(--border-radius);
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-left: 12px;
-}
-
-.nav-button:hover {
-    background-color: #33a25c;
-    transform: translateY(-2px);
-}
-
-.nav-links-box-2{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.nav-button a{
-    color: white;
-    text-decoration: none;
-}
+        .places-grid {
+          padding: 20px;
+        }
+        .footer-content {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
+    <!-- Navbar -->
     <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <span>TripInsight</span>
-            </div>
-
-            <div class="nav-links-box-2">
-                <div class="nav-links">
-                    <a href="/" class="active">Home</a>
-                    <a href="/about">About</a>
-                    <a href="/explore">Explore</a>
-                    <a href="/stories">Travel Stories</a>
-                </div>
-                {% if user.is_authenticated %}
-                <button class="nav-button">
-                    <i class="fa-solid fa-user"></i>
-                    <a href="/profile">Profile</a>
-                </button>
-                {% else %}
-                <button class="nav-button">
-                    <i class="fa-solid fa-user"></i>
-                    <a href="/signup">Sign In</a>
-                </button>
-                {% endif %}
-            </div>
+      <div class="container">
+        <div class="nav-brand">
+          <span><a href="{% url 'index' %}">TripInsight</a></span>
         </div>
+        <div class="nav-links-box-2">
+          <div class="nav-links">
+            <a href="/" class="active">Home</a>
+            <a href="/about">About</a>
+            <a href="/explore">Explore</a>
+            <a href="/stories">Travel Stories</a>
+          </div>
+          {% if user.is_authenticated %}
+          <button class="nav-button">
+            <i class="fa-solid fa-user"></i>
+            <a href="/profile">Profile</a>
+          </button>
+          {% else %}
+          <button class="nav-button">
+            <i class="fa-solid fa-user"></i>
+            <a href="/signup">Sign In</a>
+          </button>
+          {% endif %}
+        </div>
+      </div>
     </nav>
 
+    <!-- Search/Intro Section (Hero) -->
     <div class="search-container">
-        <div class="search-wrapper">
-            <h1>Explore Amazing Places</h1>
-        </div>
+      <div class="search-wrapper container">
+        <h1>Explore Amazing Places</h1>
+      </div>
     </div>
 
-    <div class="places-grid">
-
-        {% for i in places %}
-        <div class="place-card">
-            <a href="/details/{{i.id}}">
-            <img src={{i.Image_url}}
-                alt="Image">
-            <div class="place-overlay">
-                <h2>{{i.Name}}</h2>
-                <div class="place-details">
-                    <span class="category-tag">{{i.Type}}</span>
-                    <!-- <div class="rating"><span class="stars">★★★★★</span> 4.8</div> -->
-                    <p>{{i.City}}, {{i.State}}</p>
-                </div>
+    <!-- Places Grid -->
+    <div class="places-grid container">
+      {% for i in places %}
+      <div class="place-card">
+        <a href="/details/{{ i.id }}">
+          <img src="{{ i.Image_url }}" alt="Image" />
+          <div class="place-overlay">
+            <h2>{{ i.Name }}</h2>
+            <div class="place-details">
+              <span class="category-tag">{{ i.Type }}</span>
+              <p>{{ i.City }}, {{ i.State }}</p>
             </div>
+          </div>
         </a>
-        </div>
-        {% endfor %}
-
+      </div>
+      {% endfor %}
     </div>
 
+    <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>About TripAdvisor India</h3>
-                    <p>Your trusted companion for exploring the diverse beauty of India.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Popular Destinations</h3>
-                    <ul>
-                        <li><a href="#">Goa</a></li>
-                        <li><a href="#">Rajasthan</a></li>
-                        <li><a href="#">Kerala</a></li>
-                        <li><a href="#">Himachal Pradesh</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="#">Write a Review</a></li>
-                        <li><a href="#">Add a Place</a></li>
-                        <li><a href="#">Travel Forum</a></li>
-                        <li><a href="#">Help Center</a></li>
-                    </ul>
-                </div>
-                <div class="footer-section">
-                    <h3>Connect With Us</h3>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>About TripInsight</h3>
+            <p>
+              Your trusted companion for exploring the diverse beauty of India.
+            </p>
+          </div>
+          <div class="footer-section">
+            <h3>Popular Destinations</h3>
+            <ul>
+              <li><a href="#">Goa</a></li>
+              <li><a href="#">Rajasthan</a></li>
+              <li><a href="#">Kerala</a></li>
+              <li><a href="#">Himachal Pradesh</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+              <li><a href="#">Write a Review</a></li>
+              <li><a href="#">Add a Place</a></li>
+              <li><a href="#">Travel Forum</a></li>
+              <li><a href="#">Help Center</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Connect With Us</h3>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
             </div>
-            <div class="footer-bottom">
-                <p>&copy; 2023 TripAdvisor India. All rights reserved.</p>
-            </div>
+          </div>
         </div>
+        <div class="footer-bottom">
+          <p>&copy; 2023 TripInsight. All rights reserved.</p>
+        </div>
+      </div>
     </footer>
-</body>
-
+  </body>
 </html>

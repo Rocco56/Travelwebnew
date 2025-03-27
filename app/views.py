@@ -107,7 +107,7 @@ def login_view(request):
 # Logout View
 def logout_view(request):
     logout(request)
-    return redirect('login')
+    return redirect('/')
 
 gmaps = googlemaps.Client(key="AIzaSyAyUAkmbw3LUmZy5w15DmMFaVh3x-utvHw")
 def get_distance(origin, destination):
